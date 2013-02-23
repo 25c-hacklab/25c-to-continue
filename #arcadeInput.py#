@@ -40,7 +40,6 @@ class button(object):
 		elif  ( GPIO.input(self.button) == 1 and self.was_pressed) :
 			device.emit(self.key, 0) # Release.
 			self.was_pressed = False
-		print self.key
 		
 def main():
 	signal.signal(signal.SIGINT, signal_handler)
