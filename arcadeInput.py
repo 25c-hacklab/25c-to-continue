@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # arcadeInput.py
 #
 # Kevin Hughes and Hack Labs Kingston Team "25c to Play"
@@ -24,7 +25,7 @@ import uinput
 
 
 def main():
-
+	print 'start'
 	signal.signal(signal.SIGINT, signal_handler)
 	
 	GPIO.setmode(GPIO.BCM)
@@ -39,7 +40,7 @@ def main():
 	# button mappings
 	#button1 = 11
 	#GPIO.setup(button1, GPIO.IN)
-
+	print 'oh god'
 	# uinput device
 	events = (uinput.KEY_W, uinput.KEY_A, uinput.KEY_S, uinput.KEY_D)
 	#events = (uinput.BTN_JOYSTICK, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
@@ -50,7 +51,8 @@ def main():
 	GPIO.output(pinLED, 1)
 	time.sleep(1)
 	GPIO.output(pinLED, LEDon)
-	while(True):
+	print 'while'
+	while True:
 		if ( GPIO.input(pinBtn) == 0) :
 			device.emit(uinput.KEY_A, 1) # Press.
 			was_pressed = True
@@ -68,5 +70,5 @@ def signal_handler(signal, frame):
 	GPIO.cleanup()
 	sys.exit(0)
 
-if __name__ == "__main_":
+if __name__ == "__main__":
 	main()
