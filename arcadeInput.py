@@ -53,10 +53,10 @@ def main():
 	pinLEFT = 4
 	pinRIGHT = 17
 
-	GPIO.setup(pinUP   , pull_up_down=GPIO.PUD_UP)
-	GPIO.setup(pinDOWN , pull_up_down=GPIO.PUD_UP)
-	GPIO.setup(pinLEFT , pull_up_down=GPIO.PUD_UP)
-	GPIO.setup(pinRIGHT, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinUP   ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinDOWN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinLEFT ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinRIGHT,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 	#Keys
 
