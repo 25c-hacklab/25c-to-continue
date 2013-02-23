@@ -82,7 +82,7 @@ def main():
 	#button_COIN = button(pinUP, uinput.KEY_UP)
 	#button_START = button(pinUP, uinput.KEY_UP)
 	
-	buttons = [button_UP, button_DOWN,button_LEFT, button_RIGHT]#,button_A,button_B]
+	buttons = [ button_DOWN,button_LEFT, button_RIGHT, button_UP]#,button_A,button_B]
 	while True:
 		for input_button in buttons:
 			input_button.poll()
