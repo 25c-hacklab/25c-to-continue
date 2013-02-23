@@ -55,7 +55,7 @@ def main():
 			device.emit(uinput.KEY_A, 1) # Press.
 			was_pressed = True
 			GPIO.output(pinLED,1)
-		else if  ( GPIO.input(pinBtn) == 1 and was_pressed) :
+		elif  ( GPIO.input(pinBtn) == 1 and was_pressed) :
 			device.emit(uinput.KEY_A, 0) # Release.
 			was_pressed = False
 			GPIO.output(pinLED,0)
