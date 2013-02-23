@@ -12,6 +12,7 @@ GPIO.setwarnings(False)
 
 for port in GPIO_list:
     if (port != -1):
+        print port
         GPIO.setup(port,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while (True):
