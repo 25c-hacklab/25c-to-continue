@@ -22,6 +22,16 @@ import sys
 import RPi.GPIO as GPIO
 import uinput
 
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+pinBtn = 25
+GPIO.setup(pinBtn,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+pinLED = 18
+GPIO.setup(pinLED,GPIO.OUT)
+LEDon = False
+GPIO.output(pinLED, LEDon)
+
 def main():
 	signal.signal(signal.SIGINT, signal_handler)
 	
@@ -38,8 +48,14 @@ def main():
 	device = uinput.Device(events)
 
 	# Polling
-	#while(True):
-		#pass
+	was_pressed = False
+	while(True):
+		if ( GPIO.input(pinBtn) == 0) :
+			device.emit(uinput.KEY_A, 1) # Press.
+			was_pressed = True
+		else if  ( GPIO.input(pinBtn) == 1 and was_pressed) :
+			device.emit(uinput.KEY_A, 0) # Release.
+			was_pressed = False
 	
 	# Interrupt Drive
 
