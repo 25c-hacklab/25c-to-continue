@@ -51,7 +51,7 @@ def main():
 	pinUP = 2
 	pinDOWN = 3
 	pinLEFT = 4
-	pinRIGHT = 7
+	pinRIGHT = 17
 
 	GPIO.setup(pinUP   , pull_up_down=GPIO.PUD_UP)
 	GPIO.setup(pinDOWN , pull_up_down=GPIO.PUD_UP)
