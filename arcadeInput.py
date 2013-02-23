@@ -60,7 +60,7 @@ def main():
 
 	#Keys
 
-	pinA = 27
+	pinA = 25
 	pinB = 22
 	pinCOIN = 10
 	pinSTART = 9
@@ -73,12 +73,12 @@ def main():
 	# Polling
 	#Arrows
 	button_UP = button(pinUP, uinput.KEY_UP)
-	button_DOWN = button(pinUP, uinput.KEY_DOWN)
-	button_LEFT = button(pinUP, uinput.KEY_LEFT)
-	button_RIGHT = button(pinUP, uinput.KEY_RIGHT)
+	button_DOWN = button(pinDOWN, uinput.KEY_DOWN)
+	button_LEFT = button(pinLEFT, uinput.KEY_LEFT)
+	button_RIGHT = button(pinRIGHT, uinput.KEY_RIGHT)
 	#keys
-	button_A = button(pinUP, uinput.KEY_SPACE)
-	button_B = button(pinUP, uinput.KEY_LEFTCTRL)
+	button_A = button(pinA, uinput.KEY_SPACE)
+	button_B = button(pinB, uinput.KEY_LEFTCTRL)
 	#button_COIN = button(pinUP, uinput.KEY_UP)
 	#button_START = button(pinUP, uinput.KEY_UP)
 	
