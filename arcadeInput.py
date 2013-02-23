@@ -34,10 +34,10 @@ class button(object):
 		self.key = key
 		self.was_pressed = False
 	def poll(self):
-		if ( GPIO.input(self.button) == 1 and not self.was_pressed) :
+		if ( GPIO.input(self.button) == 0 and not self.was_pressed) :
 			device.emit(self.key, 1) # Press.
 			self.was_pressed = True
-		elif  ( GPIO.input(self.button) == 0 and self.was_pressed) :
+		elif  ( GPIO.input(self.button) == 1 and self.was_pressed) :
 			device.emit(self.key, 0) # Release.
 			self.was_pressed = False
 		
