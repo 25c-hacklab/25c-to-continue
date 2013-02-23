@@ -23,24 +23,22 @@ import RPi.GPIO as GPIO
 import uinput
 
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-pinBtn = 25
-GPIO.setup(pinBtn,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-pinLED = 18
-GPIO.setup(pinLED,GPIO.OUT)
-LEDon = False
-GPIO.output(pinLED, LEDon)
-
 def main():
+
 	signal.signal(signal.SIGINT, signal_handler)
 	
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
-	
+
+	pinBtn = 25
+	GPIO.setup(pinBtn,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	pinLED = 18
+	GPIO.setup(pinLED,GPIO.OUT)
+	LEDon = False
+	GPIO.output(pinLED, LEDon)
 	# button mappings
-	button1 = 11
-	GPIO.setup(button1, GPIO.IN)
+	#button1 = 11
+	#GPIO.setup(button1, GPIO.IN)
 
 	# uinput device
 	events = (uinput.KEY_W, uinput.KEY_A, uinput.KEY_S, uinput.KEY_D)
@@ -49,13 +47,19 @@ def main():
 
 	# Polling
 	was_pressed = False
+	GPIO.output(pinLED, 1)
+	time.sleep(1)
+	GPIO.output(pinLED, LEDon)
 	while(True):
 		if ( GPIO.input(pinBtn) == 0) :
 			device.emit(uinput.KEY_A, 1) # Press.
 			was_pressed = True
+			GPIO.output(pinLED,1)
 		else if  ( GPIO.input(pinBtn) == 1 and was_pressed) :
 			device.emit(uinput.KEY_A, 0) # Release.
 			was_pressed = False
+			GPIO.output(pinLED,0)
+		time.sleep(.02)
 	
 	# Interrupt Drive
 
