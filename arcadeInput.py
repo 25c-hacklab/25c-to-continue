@@ -49,23 +49,23 @@ def main():
 
 	pinBtn = 25
 	GPIO.setup(pinBtn,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	pinLED = 18
-	GPIO.setup(pinLED,GPIO.OUT)
-	LEDon = False
-	GPIO.output(pinLED, LEDon)
+	#pinLED = 18
+	#GPIO.setup(pinLED,GPIO.OUT)
+	#LEDon = False
+	#GPIO.output(pinLED, LEDon)
 	# button mappings
 	#button1 = 11
 	#GPIO.setup(button1, GPIO.IN)
 
 	# Polling
 	was_pressed = False
-	GPIO.output(pinLED, 1)
-	time.sleep(1)
-	GPIO.output(pinLED, LEDon)
+	#GPIO.output(pinLED, 1)
+	#time.sleep(1)
+	#GPIO.output(pinLED, LEDon)
 	b = button(pinBtn, uinput.KEY_UP)
 	while True:
 		b.poll()
-		time.sleep(0.1)
+		time.sleep(0.02)
 
 def signal_handler(signal, frame):
 	print "exiting"
