@@ -47,24 +47,45 @@ def main():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
 
-	pinBtn = 25
-	GPIO.setup(pinBtn,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	#pinLED = 18
-	#GPIO.setup(pinLED,GPIO.OUT)
-	#LEDon = False
-	#GPIO.output(pinLED, LEDon)
-	# button mappings
-	#button1 = 11
-	#GPIO.setup(button1, GPIO.IN)
+	#Arrows
+	pinUP = 2
+	pinDOWN = 3
+	pinLEFT = 4
+	pinRIGHT = 7
+
+	GPIO.setup(pinUP   , pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinDOWN , pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinLEFT , pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinRIGHT, pull_up_down=GPIO.PUD_UP)
+
+	#Keys
+
+	pinA = 27
+	pinB = 22
+	pinCOIN = 10
+	pinSTART = 9
+
+	GPIO.setup(pinA    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinB    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinCOIN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinSTART,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 	# Polling
-	was_pressed = False
-	#GPIO.output(pinLED, 1)
-	#time.sleep(1)
-	#GPIO.output(pinLED, LEDon)
-	b = button(pinBtn, uinput.KEY_UP)
+	#Arrows
+	button_UP = button(pinUP, uinput.KEY_UP)
+	button_DOWN = button(pinUP, uinput.KEY_DOWN)
+	button_LEFT = button(pinUP, uinput.KEY_LEFT)
+	button_RIGHT = button(pinUP, uinput.KEY_RIGHT)
+	#keys
+	button_A = button(pinUP, uinput.KEY_SPACE)
+	button_B = button(pinUP, uinput.KEY_LEFTCTRL)
+	#button_COIN = button(pinUP, uinput.KEY_UP)
+	#button_START = button(pinUP, uinput.KEY_UP)
+	
+	buttons = [button_UP, button_DOWN,button_LEFT, button_RIGHT,button_A,button_B]
 	while True:
-		b.poll()
+		for input_button in buttons:
+			input_button.poll()
 		time.sleep(0.02)
 
 def signal_handler(signal, frame):

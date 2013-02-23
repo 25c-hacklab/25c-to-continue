@@ -22,8 +22,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
 USA
 """
 """
-Slight modifications made to output to GPIO at key moments. This is to drive some blinking LEDS to enhance the retro effect
-Ryan d'Eon at Hack Labs Kingston
+Slight modifications made to output to GPIO at key moments. This is to drive some blinking LEDS to enhance the retro effect of our arcade-ish thing.
+Ryan d'Eon at RaspPi Hack Labs Kingston
 Feb 2013
 """
 import os
