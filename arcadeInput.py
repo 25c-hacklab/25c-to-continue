@@ -49,7 +49,7 @@ def main():
 
 	#Arrows
 	pinUP = 3
-	pinDOWN = 5
+	pinDOWN = 13
 	pinLEFT = 7
 	pinRIGHT = 11
 
