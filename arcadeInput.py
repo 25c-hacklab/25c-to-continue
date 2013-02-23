@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # arcadeInput.py
 #
-# Kevin Hughes and Jonathan Johnstone Hack Labs Kingston Team "25c to Play"
+# Kevin Hughes, Jonathan Johnstone, and Ryan d'Eon -  Hack Labs Kingston Team "25c to Play"
 #
 # Feb 2013
 # 
@@ -24,7 +24,7 @@ import RPi.GPIO as GPIO
 import uinput
 
 # uinput device
-events = (uinput.KEY_W, uinput.KEY_A, uinput.KEY_S, uinput.KEY_D)
+events = (uinput.KEY_UP, uinput.KEY_CTRL, uinput.KEY_SPACE, uinput.KEY_ESC)
 #events = (uinput.BTN_JOYSTICK, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
 device = uinput.Device(events)
 
@@ -62,7 +62,7 @@ def main():
 	GPIO.output(pinLED, 1)
 	time.sleep(1)
 	GPIO.output(pinLED, LEDon)
-	b = button(pinBtn, uinput.KEY_A)
+	b = button(pinBtn, uinput.KEY_UP)
 	while True:
 		b.poll()
 		time.sleep(0.1)
