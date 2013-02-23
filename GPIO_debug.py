@@ -17,6 +17,12 @@ for port in GPIO_list:
 while (True):
     for port in GPIO_list:
         if (port != -1):
+            sys.stdout.write(port)
+            sys.stdout.write(" ")
+    print ''
+    for port in GPIO_list:
+        if (port != -1):
             sys.stdout.write(GPIO.input(port))
             sys.stdout.write(" ")
     print ''
+    
