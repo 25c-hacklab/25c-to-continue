@@ -30,7 +30,10 @@ import os
 import pygame
 import random
 import sys
+
+ ###additions for lights
 import RPi.GPIO as GPIO
+import time
 
 """
 millipede dimensions -- from atari acrcade version
