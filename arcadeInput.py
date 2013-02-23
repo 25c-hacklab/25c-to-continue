@@ -24,7 +24,7 @@ import RPi.GPIO as GPIO
 import uinput
 
 # uinput device
-events = (uinput.KEY_UP, uinput.KEY_CTRL, uinput.KEY_SPACE, uinput.KEY_ESC)
+events = (uinput.KEY_UP, uinput.KEY_LEFTCTRL, uinput.KEY_SPACE, uinput.KEY_ESC)
 #events = (uinput.BTN_JOYSTICK, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
 device = uinput.Device(events)
 
