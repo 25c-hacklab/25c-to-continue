@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # arcadeInput.py
 #
-# Kevin Hughes and Hack Labs Kingston Team "25c to Play"
+# Kevin Hughes and Jonathan Johnstone Hack Labs Kingston Team "25c to Play"
 #
 # Feb 2013
 # 
@@ -23,9 +23,25 @@ import sys
 import RPi.GPIO as GPIO
 import uinput
 
+# uinput device
+events = (uinput.KEY_W, uinput.KEY_A, uinput.KEY_S, uinput.KEY_D)
+#events = (uinput.BTN_JOYSTICK, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
+device = uinput.Device(events)
 
+class button(object):
+	def __init__ (self, button, key):
+		self.button = button
+		self.key = key
+		self.was_pressed = False
+	def poll(self):
+		if ( GPIO.input(self.button) == 1 and not self.was_pressed) :
+			device.emit(self.key, 1) # Press.
+			self.was_pressed = True
+		elif  ( GPIO.input(self.button) == 0 and self.was_pressed) :
+			device.emit(self.key, 0) # Release.
+			self.was_pressed = False
+		
 def main():
-	print 'start'
 	signal.signal(signal.SIGINT, signal_handler)
 	
 	GPIO.setmode(GPIO.BCM)
@@ -40,30 +56,16 @@ def main():
 	# button mappings
 	#button1 = 11
 	#GPIO.setup(button1, GPIO.IN)
-	print 'oh god'
-	# uinput device
-	events = (uinput.KEY_W, uinput.KEY_A, uinput.KEY_S, uinput.KEY_D)
-	#events = (uinput.BTN_JOYSTICK, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
-	device = uinput.Device(events)
 
 	# Polling
 	was_pressed = False
 	GPIO.output(pinLED, 1)
 	time.sleep(1)
 	GPIO.output(pinLED, LEDon)
-	print 'while'
+	b = button(pinBtn, uinput.KEY_A)
 	while True:
-		if ( GPIO.input(pinBtn) == 0) :
-			device.emit(uinput.KEY_A, 1) # Press.
-			was_pressed = True
-			GPIO.output(pinLED,1)
-		elif  ( GPIO.input(pinBtn) == 1 and was_pressed) :
-			device.emit(uinput.KEY_A, 0) # Release.
-			was_pressed = False
-			GPIO.output(pinLED,0)
-		time.sleep(.02)
-	
-	# Interrupt Drive
+		b.poll()
+		time.sleep(0.1)
 
 def signal_handler(signal, frame):
 	print "exiting"
