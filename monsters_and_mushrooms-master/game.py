@@ -100,13 +100,19 @@ class Game:
     START_PLAYER_LIVES = 3
 
     RANDOM_EVENT_FREQ = 50
- 
+    
+    ###additions for lights
+    PIN_LIGHT_RED = 18
+    
+
+    ###
     def __init__(self):
         max_columns = Game.SCREEN_W / MushroomField.MUSHROOM_WIDTH
 
         ###additions for lights
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
+        GPIO.setup(PIN_LIGHT_RED,GPIO.OUT)
         ###
         pygame.init()
         if not pygame.font: print "Warning: fonts disabled."
@@ -817,7 +823,7 @@ class Game:
         self.mushroom_field.change_color()
 
         ###additions for gpio      ###
-        self.gpio_blink(18)
+        self.gpio_blink(PIN_LIGHT_RED)
         
     def gpio_blink (self, pin_LED):
         for i in range(1,5):
