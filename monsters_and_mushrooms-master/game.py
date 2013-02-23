@@ -112,7 +112,7 @@ class Game:
         ###additions for lights
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
-        GPIO.setup(PIN_LIGHT_RED,GPIO.OUT)
+        GPIO.setup(self.PIN_LIGHT_RED,GPIO.OUT)
         ###
         pygame.init()
         if not pygame.font: print "Warning: fonts disabled."
@@ -823,7 +823,7 @@ class Game:
         self.mushroom_field.change_color()
 
         ###additions for gpio      ###
-        self.gpio_blink(PIN_LIGHT_RED)
+        self.gpio_blink(self.PIN_LIGHT_RED)
         
     def gpio_blink (self, pin_LED):
         for i in range(1,5):
