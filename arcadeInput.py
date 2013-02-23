@@ -44,14 +44,14 @@ class button(object):
 def main():
 	signal.signal(signal.SIGINT, signal_handler)
 	
-	GPIO.setmode(GPIO.BCM)
+	GPIO.setmode(GPIO.BOARD)
 	GPIO.setwarnings(False)
 
 	#Arrows
-	pinUP = 2
-	pinDOWN = 3
-	pinLEFT = 4
-	pinRIGHT = 17
+	pinUP = 3
+	pinDOWN = 5
+	pinLEFT = 7
+	pinRIGHT = 11
 
 	GPIO.setup(pinUP   ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	GPIO.setup(pinDOWN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -60,15 +60,15 @@ def main():
 
 	#Keys
 
-	pinA = 25
-	pinB = 22
-	pinCOIN = 10
-	pinSTART = 9
+	# pinA = 25
+	#pinB = 22
+	#pinCOIN = 10
+	#pinSTART = 9
 
-	GPIO.setup(pinA    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	GPIO.setup(pinB    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	GPIO.setup(pinCOIN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	GPIO.setup(pinSTART,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	#GPIO.setup(pinA    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	#GPIO.setup(pinB    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	#GPIO.setup(pinCOIN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	#GPIO.setup(pinSTART,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 	# Polling
 	#Arrows
@@ -77,12 +77,12 @@ def main():
 	button_LEFT = button(pinLEFT, uinput.KEY_LEFT)
 	button_RIGHT = button(pinRIGHT, uinput.KEY_RIGHT)
 	#keys
-	button_A = button(pinA, uinput.KEY_SPACE)
-	button_B = button(pinB, uinput.KEY_LEFTCTRL)
+	#button_A = button(pinA, uinput.KEY_SPACE)
+	#button_B = button(pinB, uinput.KEY_LEFTCTRL)
 	#button_COIN = button(pinUP, uinput.KEY_UP)
 	#button_START = button(pinUP, uinput.KEY_UP)
 	
-	buttons = [button_UP, button_DOWN,button_LEFT, button_RIGHT,button_A,button_B]
+	buttons = [button_UP, button_DOWN,button_LEFT, button_RIGHT]#,button_A,button_B]
 	while True:
 		for input_button in buttons:
 			input_button.poll()
