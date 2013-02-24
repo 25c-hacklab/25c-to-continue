@@ -26,4 +26,5 @@ while (True):
             sys.stdout.write(str(GPIO.input(port)))
             sys.stdout.write(" ")
     print ''
+    time.sleep(1)
     
