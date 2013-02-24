@@ -90,10 +90,10 @@ def main():
 		for input_button in buttons:
 			input_button.poll()
 		## Start button
-		if ( GPIO.input(pinStart) == 0 and not button_start_pressed) :
+		if ( GPIO.input(pinSTART) == 0 and not button_start_pressed) :
 			start_script ()
 			button_start_pressed = True
-		elif  ( GPIO.input(pinStart) == 1 and button_start_pressed) :
+		elif  ( GPIO.input(pinSTART) == 1 and button_start_pressed) :
 			button_start_pressed = False
 		time.sleep(0.02)
 
@@ -102,6 +102,6 @@ def signal_handler(signal, frame):
 	GPIO.cleanup()
 	sys.exit(0)
 def start_script ():
-	subprocess.Popen("/bin/bash startup_script.bash")
+	subprocess.Popen("/bin/bash /home/pi/25c-to-continue/startup_script.bash")
 if __name__ == "__main__":
 	main()
