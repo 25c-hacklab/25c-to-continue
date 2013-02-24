@@ -26,7 +26,7 @@ def main():
 
     		time.sleep(1)
 
-def signal_handler(signal,frame)
+def signal_handler(signal,frame):
 	GPIO.cleanup()
 	sys.exit(0)
 
