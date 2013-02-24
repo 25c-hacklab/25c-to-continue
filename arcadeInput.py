@@ -60,7 +60,7 @@ def main():
 
 	#Keys
 
-	pinA = 25
+	pinA = 27
 	pinB = 22
 	#pinCOIN = 10
 	#pinSTART = 9
