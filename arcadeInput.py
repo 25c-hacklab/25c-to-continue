@@ -80,8 +80,8 @@ def main():
 	#keys
 	button_A = button(pinA, uinput.KEY_SPACE)
 	button_B = button(pinB, uinput.KEY_Z)
-	button_COIN = button(pinUP, uinput.KEY_ESC)
-	#button_START = button(pinUP, uinput.KEY_UP)
+	button_COIN = button(pinCOIN, uinput.KEY_ESC)
+	
 	
 	buttons = [ button_DOWN,button_LEFT, button_RIGHT, button_UP, button_A,button_B,button_COIN]
 	
