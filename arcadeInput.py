@@ -102,6 +102,6 @@ def signal_handler(signal, frame):
 	GPIO.cleanup()
 	sys.exit(0)
 def start_script ():
-	subprocess.Popen("/bin/bash /home/pi/25c-to-continue/startup_script.bash")
+	subprocess.Popen("/home/pi/25c-to-continue/startup_script.bash")
 if __name__ == "__main__":
 	main()
