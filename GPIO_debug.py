@@ -19,12 +19,12 @@ while (True):
     for port in GPIO_list:
         if (port != -1):
             sys.stdout.write(str(port))
-            sys.stdout.write(" ")
+            sys.stdout.write("\t")
     print ''
     for port in GPIO_list:
         if (port != -1):
-            sys.stdout.write(str(GPIO.input(port)))
-            sys.stdout.write(" ")
+            sys.stdout.write(str(int(GPIO.input(port))))
+            sys.stdout.write("\t")
     print ''
     time.sleep(1)
     
