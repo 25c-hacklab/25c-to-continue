@@ -139,8 +139,8 @@ class Game:
         
         # allocate backbuffer
         size = Game.SCREEN_W, Game.SCREEN_H
-        #self.screen = pygame.display.set_mode(size,pygame.FULLSCREEN)
-        self.screen = pygame.display.set_mode(size)
+        self.screen = pygame.display.set_mode(size,pygame.FULLSCREEN)
+        #self.screen = pygame.display.set_mode(size)
         self.background = pygame.Surface(size)
         self.background.fill([0,0,0])
         self.screen.blit(self.background, [0,0])

@@ -22,9 +22,10 @@ import signal
 import sys
 import RPi.GPIO as GPIO
 import uinput
+import subprocess
 
 # uinput device
-events = (uinput.KEY_UP, uinput.KEY_DOWN, uinput.KEY_LEFT, uinput.KEY_RIGHT, uinput.KEY_LEFTCTRL, uinput.KEY_SPACE, uinput.KEY_ESC)
+events = (uinput.KEY_UP, uinput.KEY_DOWN, uinput.KEY_LEFT, uinput.KEY_RIGHT, uinput.KEY_Z, uinput.KEY_SPACE, uinput.KEY_ESC)
 #events = (uinput.BTN_JOYSTICK, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
 device = uinput.Device(events)
 
@@ -62,13 +63,13 @@ def main():
 
 	pinA = 27
 	pinB = 22
-	#pinCOIN = 10
-	#pinSTART = 9
+	pinCOIN = 9
+	pinSTART = 10
 
 	GPIO.setup(pinA    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	GPIO.setup(pinB    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	#GPIO.setup(pinCOIN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	#GPIO.setup(pinSTART,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinCOIN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinSTART,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 	# Polling
 	#Arrows
@@ -78,20 +79,29 @@ def main():
 	button_RIGHT = button(pinRIGHT, uinput.KEY_RIGHT)
 	#keys
 	button_A = button(pinA, uinput.KEY_SPACE)
-	button_B = button(pinB, uinput.KEY_LEFTCTRL)
-	#button_COIN = button(pinUP, uinput.KEY_UP)
+	button_B = button(pinB, uinput.KEY_Z)
+	button_COIN = button(pinUP, uinput.KEY_ESC)
 	#button_START = button(pinUP, uinput.KEY_UP)
 	
-	buttons = [ button_DOWN,button_LEFT, button_RIGHT, button_UP, button_A,button_B]
+	buttons = [ button_DOWN,button_LEFT, button_RIGHT, button_UP, button_A,button_B,button_COIN]
+	
+	button_start_pressed = False
 	while True:
 		for input_button in buttons:
 			input_button.poll()
+		## Start button
+		if ( GPIO.input(pinStart) == 0 and not button_start_pressed) :
+			start_script ()
+			button_start_pressed = True
+		elif  ( GPIO.input(pinStart) == 1 and button_start_pressed) :
+			button_start_pressed = False
 		time.sleep(0.02)
 
 def signal_handler(signal, frame):
 	print "exiting"
 	GPIO.cleanup()
 	sys.exit(0)
-
+def start_script ():
+	subprocess.Popen("/bin/bash startup_script.bash")
 if __name__ == "__main__":
 	main()
