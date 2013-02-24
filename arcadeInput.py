@@ -24,7 +24,7 @@ import RPi.GPIO as GPIO
 import uinput
 
 # uinput device
-events = (uinput.KEY_UP, uinput.KEY_LEFTCTRL, uinput.KEY_SPACE, uinput.KEY_ESC)
+events = (uinput.KEY_UP, uinput.KEY_DOWN, uinput.KEY_LEFT, uinput.KEY_RIGHT, uinput.KEY_LEFTCTRL, uinput.KEY_SPACE, uinput.KEY_ESC)
 #events = (uinput.BTN_JOYSTICK, uinput.ABS_X + (0, 255, 0, 0), uinput.ABS_Y + (0, 255, 0, 0))
 device = uinput.Device(events)
 
@@ -40,19 +40,18 @@ class button(object):
 		elif  ( GPIO.input(self.button) == 1 and self.was_pressed) :
 			device.emit(self.key, 0) # Release.
 			self.was_pressed = False
-		print self.key
 		
 def main():
 	signal.signal(signal.SIGINT, signal_handler)
 	
-	GPIO.setmode(GPIO.BOARD)
+	GPIO.setmode(GPIO.BCM)
 	GPIO.setwarnings(False)
 
 	#Arrows
-	pinUP = 3
-	pinDOWN = 13
-	pinLEFT = 7
-	pinRIGHT = 11
+	pinUP = 2
+	pinDOWN = 3
+	pinLEFT = 4
+	pinRIGHT = 17
 
 	GPIO.setup(pinUP   ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	GPIO.setup(pinDOWN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -61,13 +60,13 @@ def main():
 
 	#Keys
 
-	# pinA = 25
-	#pinB = 22
+	pinA = 25
+	pinB = 22
 	#pinCOIN = 10
 	#pinSTART = 9
 
-	#GPIO.setup(pinA    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	#GPIO.setup(pinB    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinA    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+	GPIO.setup(pinB    ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	#GPIO.setup(pinCOIN ,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	#GPIO.setup(pinSTART,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
@@ -78,12 +77,12 @@ def main():
 	button_LEFT = button(pinLEFT, uinput.KEY_LEFT)
 	button_RIGHT = button(pinRIGHT, uinput.KEY_RIGHT)
 	#keys
-	#button_A = button(pinA, uinput.KEY_SPACE)
-	#button_B = button(pinB, uinput.KEY_LEFTCTRL)
+	button_A = button(pinA, uinput.KEY_SPACE)
+	button_B = button(pinB, uinput.KEY_LEFTCTRL)
 	#button_COIN = button(pinUP, uinput.KEY_UP)
 	#button_START = button(pinUP, uinput.KEY_UP)
 	
-	buttons = [ button_DOWN,button_LEFT, button_RIGHT, button_UP]#,button_A,button_B]
+	buttons = [ button_DOWN,button_LEFT, button_RIGHT, button_UP, button_A,button_B]
 	while True:
 		for input_button in buttons:
 			input_button.poll()
